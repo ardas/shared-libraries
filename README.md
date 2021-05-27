@@ -20,7 +20,8 @@ buildMaven(release:"${env.RELEASE_VERSION}",service_name:"rest-api")
 
 ```
 make build with maven and push images into docker hub
-```sh "mvn clean install docker:build -Ddocker.image.name=esputnik/${config.service_name} -Ddocker.image.tag=${config.release}"
+```
+    sh "mvn clean install docker:build -Ddocker.image.name=esputnik/${config.service_name} -Ddocker.image.tag=${config.release}"
     sh "docker tag esputnik/${config.service_name}:${config.release} esputnik/${config.service_name}:${config.release}-no-tested"
     sh "docker push esputnik/${config.service_name}:${config.release}-no-tested"
 ```
