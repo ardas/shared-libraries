@@ -1,6 +1,6 @@
 def call() {
    
-         failure {
+         
              build(
                job: 'failure-build-notification',
                parameters: [
@@ -26,6 +26,6 @@ def call() {
                  ],
                ]
              )
-         } 
+         
 }
 
