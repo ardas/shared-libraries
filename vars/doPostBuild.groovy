@@ -1,8 +1,5 @@
 def call (){
-   post {
-         always {
-             cleanWs()
-         }
+   
          failure {
              build(
                job: 'failure-build-notification',
@@ -29,7 +26,6 @@ def call (){
                  ],
                ]
              )
-         }
-
- }
+         } 
 }
+
