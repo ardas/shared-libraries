@@ -1,4 +1,4 @@
-def call() {
+def call(Map config = [:]) {
    
          
              build(
@@ -17,12 +17,12 @@ def call() {
                  [
                    $class: 'StringParameterValue',
                    name: 'FAIL_GIT_COMMIT',
-                   value: "$GIT_COMMIT",
+                   value: "${config.gitCommit}",
                  ],
                  [
                    $class: 'StringParameterValue',
                    name: 'FAIL_GIT_URL',
-                   value: "${GitURL}",
+                   value: "${config.gitUrl}",
                  ],
                ]
              )
