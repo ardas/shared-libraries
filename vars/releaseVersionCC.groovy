@@ -3,11 +3,10 @@ def call() {
                      script: '''
 #!/bin/bash
     
-echo "--= Looks like git =--"
 EXP=`expr substr $SHA 1 7`
 VCS_REVISION=`date +"%Y%m%d-%H%M"`-$EXP
 
-if [ "$SHA" != "master" ] && [ "$SHA" != "main" ]; then
+if [ "$SHA" != "master" ] && [ "$SHA" != "main" ] && ["$SHA" != "stable"]; then
    CHECK=`git branch -r $SHA --contains origin/master`
 if [ -z "$CHECK" ]; then
    echo "$CHECK not in master"
@@ -17,8 +16,10 @@ if [ -z "$CHECK" ]; then
    VCS_REVISION_FULL=`date +"%Y%m%d-%H%M"`-$EXP-$DATA
    VCS_REVISION=`echo $VCS_REVISION_FULL | cut -c -30`
  else
-  echo "$CHECK in master"
+    echo `date +'%Y%m%d-%H%M'`-`git log -n 1 | head -n 1 | sed -e 's/^commit //' | head -c 7`
  fi
+else
+    echo `date +'%Y%m%d-%H%M'`-`git log -n 1 | head -n 1 | sed -e 's/^commit //' | head -c 7`
  fi	                         
       ''',
                      returnStdout: true
