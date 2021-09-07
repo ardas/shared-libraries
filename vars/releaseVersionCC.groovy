@@ -8,7 +8,7 @@ EXP=`expr substr $SHA 1 7`
 VCS_REVISION=`date +"%Y%m%d-%H%M"`-$EXP
 
 if [ "$SHA" != "master" ] && [ "$SHA" != "main" ]; then
-   CHECK=`git branch -r --contains $SHA origin/master`
+   CHECK=`git branch -r $SHA --contains origin/master`
 if [ -z "$CHECK" ]; then
    echo "$CHECK not in master"
    echo `git name-rev --name-only --exclude=tags/* $SHA` | rev | cut -d"/" -f1  | rev | cut -d"~" -f1
