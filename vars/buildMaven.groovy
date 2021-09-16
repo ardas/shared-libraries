@@ -2,7 +2,8 @@ def call(Map config = [:]) {
     sh "echo RELEASE_VERSION ${config.release}"
     sh "echo SERVICE NAME ${config.service_name}"
     //sh "mvn clean install docker:build -Ddocker.image.name=esputnik/${config.service_name} -Ddocker.image.tag=${config.release}"
-    sh """
+    sh (
+        script: '''
         #!/bin/bash
 
         if [ ${config.skipTests} = "false" ]; then
@@ -18,6 +19,8 @@ def call(Map config = [:]) {
         #mvn clean install -Ddocker.image.tag=$VCS_REVISION -DskipTests=$SKIP
         #docker tag esputnik/${config.service_name}:${config.release} esputnik/${config.service_name}:${config.release}-no-tested
         #docker push esputnik/${config.service_name}:${config.release}-no-tested
-      """
+      ''',
+          returnStdout: true
+    )
     
 }
